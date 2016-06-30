@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url_id: 1
+  count: 1
+
+two:
+  url_id: 1
+  count: 1

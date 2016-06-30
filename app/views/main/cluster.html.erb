@@ -1,0 +1,58 @@
+<br><br><br><br><br><br><br><br><br>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Raw Match</a></li>
+  <li><a href="#profile" data-toggle="tab">Clusters</a></li>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="home">
+
+    <% @temp.each do |temp|#each url %>
+      <% @counter1=0 %>
+      <% @text=temp.web %>
+      <% @temp1=Keyword.where(:search_id => params[:params1]) #keywords %>
+      <% @temp1.each do |temp1_key| %>
+        <% if @text.include?(temp1_key.word) %>
+             <% @counter1+=1 %>
+           <% end -%>
+        <% end -%>
+        <% @temp_sa=Cluster.new(:url_id => temp.id, :count => @counter1) %>
+        <% @temp_sa.save %>
+        
+        :<%= @counter1 %>:  <%=link_to temp.link, temp.link %><br>
+        <% end -%>
+        <% @h=Url.all %>
+ 
+  </div>
+  <div class="tab-pane fade" id="profile">
+
+    <form name="sentMessage" id="contactForm">                       
+          <%= form_tag(:controller => "main", :action => "cluster", :method => "get", :html => {:autocomplete => "off"}) do %>
+                                  
+            <%= number_field_tag :params2, params[:params2], placeholder: "Number of Clusters", max:  (@t1.link_num/2), min: 2, :autocomplete => :off %>
+            <%= hidden_field_tag :params1, params[:params1], :value => params[:params1] %>
+            
+            <%= submit_tag "Implement" %>
+          <% end -%>
+
+  <% @te=Kmeean.all %>
+  <% if @sa.blank?%>
+  <%else%>
+  <% if @te.blank? %>
+  <% else %>
+  
+        <% @te.each do |te| %>
+
+
+       
+        <%= te.cluster_id %>
+        <%= link_to te.link, te.link %>
+        <%= te.count %><br>
+        <%= progress_bar(((te.count * 100)/@sa), :color => 'red', :rounded => true) %> <br>
+        <% te.delete %>
+        <% end -%>
+
+  <% end -%>
+<% end -%>
+  </div>
+</div>

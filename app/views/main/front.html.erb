@@ -1,0 +1,109 @@
+<h1>Main#front</h1>
+
+ <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Enter Search</h2>
+                    <form name="sentMessage" id="contactForm">                       
+<%= form_tag(:controller => "main", :action => "front", :method => "get") do %>
+                        <div class="form-control">
+  <%= text_field_tag :query, params[:query], placeholder: "Search Google" %>
+  <%= number_field_tag :size, params[:size], placeholder: "Search Size" %>
+  <%= submit_tag "Search" %>
+    </form>
+    <% end %>
+
+
+
+           <hr class="star-light">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Results</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+
+
+
+  <ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Regular</a></li>
+  <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Clustered</a></li>
+  
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="home">
+     <div class="container" >
+    <ul class="list-group">
+    <% @images.results.to_a.each do |image| %>
+    <li>
+        <% page = MetaInspector.new(image[:url], faraday_options: { ssl: { verify: false } }) %>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="panel-info">
+                    <p><strong><%= link_to image[:title], image[:url] %></strong></p>
+                    <p><%=  page.description %></p>
+                    <p><%= link_to "Expand", {:controller => "main", :action => "sites", :link => page.url }%></p>
+                </div>
+                
+                         
+                
+            </div>
+        </div>
+    </li>
+    <% end %>
+</ul>
+</div>
+  </div>
+  <div class="tab-pane fade" id="profile">
+  
+
+
+
+
+
+
+  </div>
+
+</div>
+
+           
+            
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>The Project aims to improve search accuracy by using certain fiters and annotation techniques apart from classification of results. The Basic search results are derived from the normal google search source. Next the results are put through a crawling sub-system to analyse the data in the respective web-pages. </p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Whether you're a student looking to have a more directed search, or a professional looking to make the search routine faster, this project will be beneficial to you.</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+

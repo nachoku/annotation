@@ -1,0 +1,47 @@
+
+
+
+ <section  id="portfolio">
+        <div class="container">
+			<br>	<br>	<br>
+			<%=flash[:notice] %>
+			<% flash[:notice] = nil %>
+		<% @images.each do |image| %>
+			<div class="panel panel-primary">
+			<div class="panel-heading" onmouseover="this.style.cursor='pointer';"
+onclick="location.href='<%= main_cluster_path(:params1 => image.id) %>';"
+style="cursor: pointer;">
+
+					
+			
+			<%= image.id %>:<%= image.query %>
+			</div>
+			                    <form name="sentMessage" id="contactForm">                       
+					<%= form_tag(:controller => "main", :action => "front", :method => "get", :html => {:autocomplete => "off"}) do %>
+					                        
+					  <%= text_field_tag :word, params[:word], placeholder: "Keyword", :autocomplete => :off %>
+
+					  <%= hidden_field_tag :image, params[:image], :value => image.id.to_i %>
+					  <%= submit_tag "Add" %>
+					    </form>
+					    <% end %>
+					    	
+			<% @url=Search.where(:id => image.id) %>
+			<% if @url.nil? %>
+			<% else %>
+			<div class="panel-body">
+			<% @url.each do |u| %>
+			
+				<% @url2=Keyword.where(:search_id => u.id) %>
+				
+				<% @url2.each do |u| %>
+					<%= u.search_id %>:<%= u.word %><%= u.id %><%= link_to("X", {:action => "delete", :id => u.id}) %><br>
+				<% end -%>
+			<% end -%>
+			</div>
+		<% end -%>
+			</div>
+			<br>
+		<% end %>
+		</div>
+</section>

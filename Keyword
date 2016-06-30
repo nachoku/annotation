@@ -1,0 +1,62 @@
+            <% if  @words.try.nil? %>
+
+            <% else %>
+            <p><%  @words.to_a.each do |word|%>
+            		<%= word %><br>
+				<% end %>
+                <% end %>
+
+
+
+
+<%keyword=1%>
+
+
+
+Keyword table match
+
+		1	2	3	4
+
+	1	0	4	1	2
+
+	2		
+
+	3
+
+	4
+
+
+# This is an irregular 2D array (a jagged array).
+values = [["A", "B", "C"], ["D", "E", "F"], ["G", "H"]]
+
+num_link=s.num_link
+for i i<num_link i++
+	for j<num_link j++
+		if i!=j
+
+			url1=url.id+i
+			url2=url.id+j
+			temp1=url1.to_s
+			temp2=url2.to_s
+			while keywords
+
+				if temp1.include && temp2.include
+					counter++
+				end
+			end
+		end
+			values[i][j]=counter
+	end
+end
+
+# Loop over indexes
+values.each_index do |i|
+
+    # Get subarray and loop over its indexes also.
+    subarray = values[i]
+    subarray.each_index do |x|
+	# Display the cell.
+	puts String(i) << " " << String(x) << "... " << values[i][x]
+    end
+
+end
